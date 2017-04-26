@@ -193,10 +193,12 @@
                 <container_catalog_category><![CDATA[<div style="width: 100%; text-align: center; padding-bottom: 7px ">{container}</div>]]></container_catalog_category>
                 <container_catalog_product><![CDATA[<div style="width: 100%; text-align: center; padding-bottom: 7px ">{container}</div>]]></container_catalog_product>
                 <container_checkout_cart><![CDATA[<div style="width: 100%; text-align: center; padding-bottom: 7px ">{container}</div>]]></container_checkout_cart>
+                <container_checkout_onepage><![CDATA[<div style="width: 100%; text-align: center; padding-bottom: 7px ">{container}</div>]]></container_checkout_onepage>
                 <path_homepage>cms.index.index</path_homepage>
                 <path_catalog_category>catalog.category.view</path_catalog_category>
                 <path_catalog_product>catalog.product.view</path_catalog_product>
                 <path_checkout_cart>checkout.cart.index</path_checkout_cart>
+                <path_checkout_onepage>checkout.onepage.index</path_checkout_onepage>
             </developer_settings>
             <homepage>
                 <display>1</display>
@@ -218,6 +220,11 @@
                 <size>468x60</size>
                 <position>center-top</position>
             </checkout_cart>
+            <checkout_onepage>
+              <display>1</display>
+              <size>468x60</size>
+              <position>center-top</position>
+            </checkout_onepage>
             <as_low_as>
                 <apr_value>0.10</apr_value>
                 <promo_months>12</promo_months>

@@ -46,4 +46,20 @@
                    template="affirm/promo/aslowas/product.phtml" after="-" />
         </reference>
     </catalog_product_view>
+
+    <checkout_onepage_index>
+      <reference name="head">
+        <action method="addItem">
+          <type>skin_js</type>
+          <name helper="affirm/promo_data/getCheckoutAffirmJsScript" />
+        </action>
+      </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_review>
+       <reference name="checkout.onepage.review.info.items.after">
+        <block type="affirm/promo_asLowAs_onepage" name="as.low.as.pdp"
+               template="affirm/promo/aslowas/onepage.phtml" after="-" />
+      </reference>
+    </checkout_onepage_review>
 </layout>

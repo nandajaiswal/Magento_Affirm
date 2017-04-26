@@ -69,6 +69,11 @@ class Affirm_Affirm_Helper_Promo_Data extends Mage_Core_Helper_Abstract
     const AFFIRM_PROMO_CHECKOUT_CART_PATH = 'affirmpromo/developer_settings/path_checkout_cart';
 
     /**
+     * Checkout onepage path
+     */
+    const AFFIRM_PROMO_CHECKOUT_ONEPAGE_PATH = 'affirmpromo/developer_settings/path_checkout_onepage';
+
+    /**
      * Affirm promo dev settings containers
      */
     const AFFIRM_PROMO_DEV_SETTINGS_CONTAINER = 'affirmpromo/developer_settings/container_';
@@ -169,6 +174,17 @@ class Affirm_Affirm_Helper_Promo_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Get checkout onepage path
+     *
+     * @param null|Mage_Core_Model_Store $store
+     * @return string
+     */
+    public function getCheckoutOnepagePath($store = null)
+    {
+        return Mage::getStoreConfig(self::AFFIRM_PROMO_CHECKOUT_ONEPAGE_PATH, $store);
+    }
+
+    /**
      * Get container settings
      *
      * @param null|Mage_Core_Model_Store $store
@@ -192,13 +208,14 @@ class Affirm_Affirm_Helper_Promo_Data extends Mage_Core_Helper_Abstract
                 $this->getCatalogProductPath() => 'catalog_product',
                 $this->getCatalogCategoryPath() => 'catalog_category',
                 $this->getHomepagePath() => 'homepage',
-                $this->getCheckoutCartPath() => 'checkout_cart'
+                $this->getCheckoutCartPath() => 'checkout_cart',
+                $this->getCheckoutOnepagePath() => 'checkout_onepage',
             );
             $config = new Varien_Object();
             $module = Mage::app()->getRequest()->getModuleName();
             $controller = Mage::app()->getRequest()->getControllerName();
             $action = Mage::app()->getRequest()->getActionName();
-
+            Mage::log($module.$controller.$action);
             if (isset($codeMap[$module . '.' . $controller . '.' . $action])) {
                 $pageCode = $codeMap[$module . '.' . $controller . '.' . $action];
                 $size = Mage::getStoreConfig('affirmpromo/' . $pageCode . '/size');
@@ -216,7 +233,6 @@ class Affirm_Affirm_Helper_Promo_Data extends Mage_Core_Helper_Abstract
             }
             $this->_config = $config;
         }
-
         return $this->_config;
     }
 

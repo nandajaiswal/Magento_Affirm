@@ -29,6 +29,13 @@ class Affirm_Affirm_Helper_Promo_AsLowAs extends Mage_Core_Helper_Abstract
     protected $_skippedTypes = array(Mage_Catalog_Model_Product_Type::TYPE_GROUPED);
 
     /**
+     * Disabled back ordered on checkout
+     *
+     * @var bool
+     */
+    protected $_affirmDisabledBackOrderedCheckout;
+
+    /**
      * Disabled back ordered on cart
      *
      * @var bool
@@ -51,6 +58,11 @@ class Affirm_Affirm_Helper_Promo_AsLowAs extends Mage_Core_Helper_Abstract
      * Visibility as low as on cart
      */
     const AFFIRM_PROMO_AS_LOW_AS_CART = 'affirmpromo/as_low_as/as_low_as_cart';
+
+    /**
+     * Visibility as low as on checkout
+     */
+    const AFFIRM_PROMO_AS_LOW_AS_CHECKOUT = 'affirmpromo/as_low_as/as_low_as_checkout';
 
     /**
      * As low as APR value
@@ -82,6 +94,17 @@ class Affirm_Affirm_Helper_Promo_AsLowAs extends Mage_Core_Helper_Abstract
     public function isVisibleOnCart($store = null)
     {
         return Mage::getStoreConfig(self::AFFIRM_PROMO_AS_LOW_AS_CART, $store);
+    }
+
+    /**
+     * Check is visible on checkout
+     *
+     * @param null|Mage_Core_Model_Store $store
+     * @return string
+     */
+    public function isVisibleOnCheckout($store = null)
+    {
+        return Mage::getStoreConfig(self::AFFIRM_PROMO_AS_LOW_AS_CHECKOUT, $store);
     }
 
     /**
@@ -131,6 +154,20 @@ class Affirm_Affirm_Helper_Promo_AsLowAs extends Mage_Core_Helper_Abstract
             $this->_affirmDisabledBackOrderedCart = Mage::helper('affirm')->isDisableQuoteBackOrdered() ||
                 Mage::helper('affirm')->isDisableModuleFunctionality() ||
                 !$this->isVisibleOnCart() || !Mage::helper('affirm')->isAffirmPaymentMethodEnabled();
+        }
+        return $this->_affirmDisabledBackOrderedCart;
+    }
+
+    /**
+     * Is As Low As disabled on onepage
+     *
+     * @return bool
+     */
+    public function isAsLowAsDisabledOnOnepage()
+    {
+        if (null === $this->_affirmDisabledBackOrderedCheckout) {
+            $this->_affirmDisabledBackOrderedCheckout = Mage::helper('affirm')->isDisableModuleFunctionality() ||
+                !$this->isVisibleOnCheckout() || !Mage::helper('affirm')->isAffirmPaymentMethodEnabled();
         }
         return $this->_affirmDisabledBackOrderedCart;
     }
